@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Firaz Al Aqib — Portfolio
 
-## Getting Started
+Personal portfolio site built with **Next.js 16 (App Router) + TypeScript + Tailwind CSS v4**, styled after the Binance design language (deep near-black canvas, single yellow accent, tabular numbers) defined in [DESIGN.md](DESIGN.md).
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** — App Router
+- **Tailwind CSS v4** — design tokens live in [src/app/globals.css](src/app/globals.css) (`@theme`)
+- **Fonts** — Inter (BinanceNova substitute) + JetBrains Mono (BinancePlex substitute, used for all numbers/dates)
+- **Bilingual** — English (default) + Indonesian toggle, via a lightweight React context
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All copy and project data is in **one file**: [src/content/data.ts](src/content/data.ts). Each text field is `{ en, id }`. Update there — components read from it automatically.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### TODO before publishing
 
-## Learn More
+- **GitHub URL** — set the real one in `PROFILE.github` in [src/content/data.ts](src/content/data.ts) (currently a placeholder).
+- Update `metadataBase` in [src/app/layout.tsx](src/app/layout.tsx) to your real domain.
 
-To learn more about Next.js, take a look at the following resources:
+## Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    layout.tsx        # fonts + LanguageProvider + metadata
+    page.tsx          # section composition
+    globals.css       # design tokens (@theme)
+  components/
+    LanguageProvider.tsx  # EN/ID context + t() helper
+    TopNav.tsx
+    Hero.tsx              # name, tagline, stat callouts, education badge
+    Projects.tsx          # "markets table" of projects, expandable rows
+    Experience.tsx
+    Skills.tsx            # skills + awards
+    Contact.tsx
+    Footer.tsx            # light footer (Binance signature)
+  content/
+    data.ts           # ← all content here
+```
