@@ -9,7 +9,7 @@ export const PROFILE = {
   name: "Firaz Al Aqib",
   role: { en: "Fullstack Developer", id: "Fullstack Developer" } as Localized,
   location: { en: "Jakarta, Indonesia", id: "Jakarta, Indonesia" } as Localized,
-  email: "muhammad.firazalaqib@gmail.com",
+  email: "contact@firaz.my.id",
   phone: "+62 878-8805-0534",
   linkedin: "https://www.linkedin.com/in/firaz-al-aqib",
   // TODO: replace with real GitHub username/url
@@ -40,6 +40,7 @@ export type Experience = {
   title: Localized;
   period: Localized;
   desc: Localized;
+  logo?: string;
 };
 
 export const EXPERIENCE: Experience[] = [
@@ -47,6 +48,7 @@ export const EXPERIENCE: Experience[] = [
     company: "PT. Pejuang Indonesia Cerdas",
     title: { en: "Fullstack Developer Intern", id: "Fullstack Developer Intern" },
     period: { en: "Sep 2025 — Jan 2026", id: "September 2025 — Januari 2026" },
+    logo: "/images/pejos.png",
     desc: {
       en: "Designed, developed and maintained web app features across frontend and backend. Implemented scalable software architecture, efficient RESTful API integrations, and database management for optimal, responsive performance.",
       id: "Terlibat dalam perancangan, pengembangan, dan pemeliharaan fungsionalitas aplikasi web dari sisi frontend maupun backend. Mengimplementasikan arsitektur skalabel, integrasi RESTful API yang efisien, dan pengelolaan database untuk performa optimal.",
@@ -62,6 +64,7 @@ export const EXPERIENCE: Experience[] = [
       en: "Feb–Jun 2025 & Feb 2026 — Present",
       id: "Feb–Jun 2025 & Feb 2026 — Sekarang",
     },
+    logo: "/images/ui.png",
     desc: {
       en: "Mentored students in object-oriented programming concepts using Java.",
       id: "Membimbing mahasiswa memahami konsep pemrograman berorientasi objek menggunakan Java.",
@@ -78,11 +81,13 @@ export type Project = {
   stack: string[];
   period: Localized;
   status: ProjectStatus;
-  highlight?: Localized; // e.g. "Grade A", "3.8/4.0 client score"
+  highlight?: Localized;
   url?: string;
   points: Localized[];
   /** Marks a project for the visual "Featured work" grid. */
   featured?: boolean;
+  /** Hides from the All Projects list (still shows in Featured Work). */
+  featuredOnly?: boolean;
   /** Path under /public, e.g. "/images/projects/gca.png". Falls back to a monogram if unset. */
   image?: string;
   /** Accent color for the placeholder tile (Tailwind-safe hex). */
@@ -99,9 +104,10 @@ export const PROJECTS: Project[] = [
     stack: ["Next.js", "Spring Boot", "PostgreSQL", "AWS Rekognition", "AWS SDK"],
     period: { en: "Feb 2026 — Present", id: "Februari 2026 — Sekarang" },
     status: "live",
+    url: "https://dev.garudacendekiaacademy.com",
     featured: true,
     accent: "#fcd535",
-    // image: "/images/projects/gca.png",
+    image: "/images/gca.png",
     blurb: {
       en: "End-to-end school information system with face-recognition attendance powered by AWS Rekognition.",
       id: "Sistem informasi sekolah end-to-end dengan absensi face recognition bertenaga AWS Rekognition.",
@@ -135,7 +141,7 @@ export const PROJECTS: Project[] = [
     url: "https://www.sokratech.io/",
     featured: true,
     accent: "#0ecb81",
-    // image: "/images/projects/sokratech.png",
+    image: "/images/sokratech.png",
     blurb: {
       en: "Fraud-detection platform with a behavioral-tracking SDK: touch tracking, offline queues, device fingerprinting.",
       id: "Platform fraud detection dengan SDK behavioral tracking: touch tracking, offline queues, device fingerprinting.",
@@ -152,6 +158,40 @@ export const PROJECTS: Project[] = [
       {
         en: "Built device-fingerprinting modules for anomaly detection & fraud prevention.",
         id: "Membangun modul device fingerprinting untuk deteksi anomali dan pencegahan penipuan.",
+      },
+    ],
+  },
+  {
+    symbol: "POS",
+    name: "Pejuang OSN",
+    role: { en: "Fullstack Developer", id: "Fullstack Developer" },
+    stack: ["Django", "Next.js", "PostgreSQL", "Redis"],
+    period: { en: "Sep 2025 — Jan 2026", id: "September 2025 — Januari 2026" },
+    status: "shipped",
+    featured: true,
+    featuredOnly: true,
+    accent: "#2dbdb6",
+    image: "/images/pjos.png",
+    blurb: {
+      en: "OSN preparation platform built during internship — practice problems, progress tracking, and leaderboards.",
+      id: "Platform persiapan OSN yang dibangun saat magang — soal latihan, tracking progress, dan leaderboard.",
+    },
+    points: [
+      {
+        en: "Built a full-stack OSN preparation platform during internship at PT. Pejuang Indonesia Cerdas.",
+        id: "Membangun platform persiapan OSN secara full-stack saat magang di PT. Pejuang Indonesia Cerdas.",
+      },
+      {
+        en: "Implemented practice problem modules with real-time progress tracking per subject and level.",
+        id: "Mengimplementasikan modul soal latihan dengan tracking progress real-time per mata pelajaran dan level.",
+      },
+      {
+        en: "Used Redis for session caching and leaderboard ranking to handle concurrent users.",
+        id: "Menggunakan Redis untuk session caching dan ranking leaderboard agar dapat menangani pengguna secara bersamaan.",
+      },
+      {
+        en: "Integrated Django REST framework with a Next.js frontend for a responsive, SEO-friendly experience.",
+        id: "Mengintegrasikan Django REST framework dengan frontend Next.js untuk pengalaman responsif dan SEO-friendly.",
       },
     ],
   },
@@ -185,11 +225,7 @@ export const PROJECTS: Project[] = [
     stack: ["Spring Boot", "Next.js", "PostgreSQL"],
     period: { en: "Jun — Jul 2025", id: "Juni — Juli 2025" },
     status: "shipped",
-    highlight: { en: "3.8/4.0 client score", id: "Skor klien 3.8/4.0" },
     url: "https://cemal-cemil.vercel.app",
-    featured: true,
-    accent: "#2dbdb6",
-    // image: "/images/projects/cemal-cemil.png",
     blurb: {
       en: "Financial-bookkeeping app for an SME under the BCA Bakti Scholarship — shipped with a 3.8/4.0 client score.",
       id: "Aplikasi pencatatan keuangan UMKM dalam Beasiswa Bakti BCA — rilis dengan skor klien 3.8/4.0.",
@@ -212,7 +248,6 @@ export const PROJECTS: Project[] = [
     stack: ["Spring Boot", "Next.js", "PostgreSQL", "Docker", "CI/CD"],
     period: { en: "Mar — Jun 2025", id: "Maret — Juni 2025" },
     status: "shipped",
-    highlight: { en: "Grade A", id: "Nilai A" },
     points: [
       {
         en: "Built a repair-service app with three roles (technician, admin, user) as the Advanced Programming final project.",
@@ -257,7 +292,6 @@ export const PROJECTS: Project[] = [
     stack: ["Next.js", "PostgreSQL", "Docker"],
     period: { en: "Mar — Jun 2024", id: "Maret — Juni 2024" },
     status: "shipped",
-    highlight: { en: "Grade A", id: "Nilai A" },
     points: [
       {
         en: "Built a simple food-ordering app with auth, menu management, and order processing.",

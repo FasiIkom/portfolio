@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "./LanguageProvider";
 import { EXPERIENCE } from "@/content/data";
 import { Reveal } from "./anim";
@@ -27,14 +28,25 @@ export default function Experience() {
               delay={i * 120}
               className="grid gap-3 rounded-lg border border-hairline-dark bg-surface-card-dark p-6 transition-colors hover:border-muted md:grid-cols-[1fr_2fr] md:gap-8"
             >
-              <div>
-                <p className="text-base font-semibold text-on-dark">
-                  {t(exp.title)}
-                </p>
-                <p className="mt-1 text-sm text-primary">{exp.company}</p>
-                <p className="mt-2 font-num text-xs text-muted">
-                  {t(exp.period)}
-                </p>
+              <div className="flex items-start gap-4">
+                {exp.logo && (
+                  <Image
+                    src={exp.logo}
+                    alt={exp.company}
+                    width={44}
+                    height={44}
+                    className="shrink-0 object-contain"
+                  />
+                )}
+                <div>
+                  <p className="text-base font-semibold text-on-dark">
+                    {t(exp.title)}
+                  </p>
+                  <p className="mt-1 text-sm text-primary">{exp.company}</p>
+                  <p className="mt-2 font-num text-xs text-muted">
+                    {t(exp.period)}
+                  </p>
+                </div>
               </div>
               <p className="text-sm leading-relaxed text-muted-strong">
                 {t(exp.desc)}

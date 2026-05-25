@@ -150,7 +150,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
       <div className="container-x relative pt-14 pb-[var(--section-y)] md:pt-16">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr]">
+        <div className="grid items-start gap-10 lg:grid-cols-[1.25fr_0.75fr]">
           {/* Left: headline */}
           <div className="animate-rise min-w-0 pb-2 lg:pb-10">
             <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-tight text-on-dark text-balance">

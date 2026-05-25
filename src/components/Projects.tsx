@@ -199,7 +199,7 @@ export default function Projects() {
 
   const filtered = useMemo(
     () =>
-      PROJECTS.filter((p) => filter === "all" || p.status === filter),
+      PROJECTS.filter((p) => !p.featuredOnly && (filter === "all" || p.status === filter)),
     [filter]
   );
 

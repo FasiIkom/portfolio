@@ -18,12 +18,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Firaz Al Aqib — Fullstack Developer",
+  title: "Firaz Al Aqib - Portfolio",
   description:
     "Fullstack Developer & Computer Science student at Universitas Indonesia. 7+ shipped projects across academic systems, fraud detection, and fintech.",
   metadataBase: new URL("https://firaz.my.id"),
   openGraph: {
-    title: "Firaz Al Aqib — Fullstack Developer",
+    title: "Firaz Al Aqib - Portfolio",
     description:
       "Fullstack Developer & Computer Science student at Universitas Indonesia.",
     type: "website",
