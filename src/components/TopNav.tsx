@@ -15,12 +15,30 @@ export default function TopNav() {
   const { lang, toggle, t } = useLang();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const ids = links.map((l) => l.href.slice(1));
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-20% 0px -65% 0px" }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -42,16 +60,24 @@ export default function TopNav() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-7">
-          {links.map((l) => (
-            <li key={l.key}>
-              <a
-                href={l.href}
-                className="text-sm font-medium text-muted-strong transition-colors hover:text-on-dark"
-              >
-                {t(UI.nav[l.key])}
-              </a>
-            </li>
-          ))}
+          {links.map((l) => {
+            const isActive = active === l.href.slice(1);
+            return (
+              <li key={l.key}>
+                <a
+                  href={l.href}
+                  className={`relative text-sm font-medium transition-colors hover:text-on-dark ${
+                    isActive ? "text-on-dark" : "text-muted-strong"
+                  }`}
+                >
+                  {t(UI.nav[l.key])}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-primary" />
+                  )}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Right cluster */}
@@ -108,17 +134,23 @@ export default function TopNav() {
       {open && (
         <div className="md:hidden border-t border-hairline-dark bg-canvas-dark">
           <ul className="container-x flex flex-col py-2">
-            {links.map((l) => (
-              <li key={l.key}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 text-sm font-medium text-body border-b border-hairline-dark last:border-0"
-                >
-                  {t(UI.nav[l.key])}
-                </a>
-              </li>
-            ))}
+            {links.map((l) => {
+              const isActive = active === l.href.slice(1);
+              return (
+                <li key={l.key}>
+                  <a
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-center justify-between py-3 text-sm font-medium border-b border-hairline-dark last:border-0 transition-colors ${
+                      isActive ? "text-primary" : "text-body"
+                    }`}
+                  >
+                    {t(UI.nav[l.key])}
+                    {isActive && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
+                  </a>
+                </li>
+              );
+            })}
             <li className="pt-3 pb-1">
               <a
                 href="#contact"

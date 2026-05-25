@@ -29,8 +29,12 @@ export default function Contact() {
 
             <a
               href={`mailto:${PROFILE.email}`}
-              className="inline-flex h-12 shrink-0 items-center justify-center rounded-md bg-primary px-8 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active"
+              className="inline-flex h-12 shrink-0 items-center justify-center gap-2.5 rounded-md bg-primary px-8 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active"
             >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
+                <path d="m3 7 9 6 9-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
               {t({ en: "Email me", id: "Email saya" })}
             </a>
           </div>

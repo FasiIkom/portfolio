@@ -59,7 +59,13 @@
    with Tailwind's sizing scale (max-w-*, w-*, etc.). Referenced via
    [var(--section-y)] in components. */
 :root {
-  --section-y: 80px;
+  --section-y: 48px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-y: 80px;
+  }
 }
 
 html {
