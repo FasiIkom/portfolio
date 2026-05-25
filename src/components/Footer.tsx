@@ -75,7 +75,6 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-hairline-dark pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} {PROFILE.name}. {t({ en: "All rights reserved.", id: "Hak cipta dilindungi." })}</p>
-          <p>{t({ en: "Built with Next.js & Tailwind CSS.", id: "Dibuat dengan Next.js & Tailwind CSS." })}</p>
         </div>
       </div>
     </footer>
