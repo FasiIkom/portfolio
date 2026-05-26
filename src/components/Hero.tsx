@@ -17,12 +17,12 @@ function TerminalPrompt() {
   );
 }
 
-function TerminalCard({ school, major, gpa }: { school: string; major: string; gpa: string }) {
+function TerminalCard({ school, major, semester }: { school: string; major: string; semester: string }) {
   const CMDS = useMemo(() => [
     { cmd: "cat education.txt", output: school },
     { cmd: "cat major.txt",     output: major },
-    { cmd: "cat gpa.txt",       output: gpa, isGpa: true },
-  ], [school, major, gpa]);
+    { cmd: "cat semester.txt",  output: semester },
+  ], [school, major, semester]);
 
   const [started, setStarted]   = useState(false);
   const [cmdIdx, setCmdIdx]     = useState(0);
@@ -100,9 +100,7 @@ function TerminalCard({ school, major, gpa }: { school: string; major: string; g
               </div>
               {/* output line */}
               <div style={{ opacity: isRevealed ? 1 : 0 }}>
-                {cmdItem.isGpa
-                  ? <CountUp value={cmdItem.output} className="font-bold text-primary" />
-                  : <span className="text-muted-strong">{cmdItem.output}</span>}
+                <span className="text-muted-strong">{cmdItem.output}</span>
               </div>
             </div>
           );
@@ -118,13 +116,53 @@ function TerminalCard({ school, major, gpa }: { school: string; major: string; g
   );
 }
 
+function EmailCard() {
+  const [copied, setCopied] = useState(false);
+  function handleCopy() {
+    navigator.clipboard.writeText(PROFILE.email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+  return (
+    <div className="flex h-10 items-center gap-2 rounded-md border border-hairline-dark bg-surface-card-dark px-3 text-muted-strong">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8" />
+        <path d="m3 7 9 6 9-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span className="font-mono text-xs">{PROFILE.email}</span>
+      <button
+        onClick={handleCopy}
+        aria-label={copied ? "Copied!" : "Copy email"}
+        title={copied ? "Copied!" : "Copy email"}
+        className="ml-0.5 text-muted-strong transition-colors hover:text-on-dark"
+      >
+        {copied ? (
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        ) : (
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="1.8" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" strokeWidth="1.8" />
+          </svg>
+        )}
+      </button>
+    </div>
+  );
+}
+
 function Social({
   href,
   label,
+  username,
+  className = "",
   children,
 }: {
   href: string;
   label: string;
+  username?: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -133,9 +171,12 @@ function Social({
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-md border border-hairline-dark bg-surface-card-dark text-muted-strong transition-colors hover:border-primary/60 hover:text-on-dark"
+      className={`flex h-10 items-center gap-2 rounded-md border border-hairline-dark bg-surface-card-dark px-3 text-muted-strong transition-colors hover:border-primary/60 hover:text-on-dark ${className}`}
     >
       {children}
+      {username && (
+        <span className="hidden sm:inline font-mono text-xs">{username}</span>
+      )}
     </a>
   );
 }
@@ -179,18 +220,13 @@ export default function Hero() {
               </a>
 
               <div className="ml-1 flex items-center gap-2">
-                <Social href={`mailto:${PROFILE.email}`} label="Email">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8" />
-                    <path d="m3 7 9 6 9-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Social>
-                <Social href={PROFILE.linkedin} label="LinkedIn">
+                <EmailCard />
+                <Social href={PROFILE.linkedin} label="LinkedIn" username="firaz-al-aqib">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H17.6v-5.34c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.81V21H9V9Z" />
                   </svg>
                 </Social>
-                <Social href={PROFILE.github} label="GitHub">
+                <Social href={PROFILE.github} label="GitHub" username="FasiIkom">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.41.97.1-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.42.36.8 1.08.8 2.18v3.23c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .5Z" />
                   </svg>
@@ -201,7 +237,7 @@ export default function Hero() {
             <TerminalCard
               school={EDUCATION.school}
               major={t(EDUCATION.major)}
-              gpa={EDUCATION.gpa}
+              semester={EDUCATION.semester}
             />
           </div>
 

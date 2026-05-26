@@ -51,6 +51,8 @@ export default function Footer() {
             </p>
             <a
               href={`mailto:${PROFILE.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-3 inline-block font-num text-sm text-body underline-offset-4 transition-colors hover:text-primary"
             >
               {PROFILE.email}
@@ -62,8 +64,8 @@ export default function Footer() {
               <a
                 key={s.label}
                 href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={s.label}
                 className="flex h-10 w-10 items-center justify-center rounded-md border border-hairline-dark bg-surface-card-dark text-muted-strong transition-colors hover:border-primary/60 hover:text-on-dark"
               >
