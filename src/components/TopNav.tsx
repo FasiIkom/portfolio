@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLang } from "./LanguageProvider";
-import { UI } from "@/content/data";
+import { UI, PROFILE } from "@/content/data";
 
 const links = [
   { href: "#projects", key: "projects" as const },
@@ -94,6 +94,17 @@ export default function TopNav() {
           </button>
 
           <a
+            href={PROFILE.cv[lang]}
+            download
+            className="btn-cv hidden md:inline-flex h-10 items-center justify-center gap-2 rounded-md border border-primary/50 px-4 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0">
+              <path d="M12 3v13M7 11l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M3 21h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+            {t(UI.cta.resume)}
+          </a>
+          <a
             href="#contact"
             className="hidden sm:inline-flex h-10 items-center justify-center rounded-md bg-primary px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active"
           >
@@ -151,7 +162,19 @@ export default function TopNav() {
                 </li>
               );
             })}
-            <li className="pt-3 pb-1">
+            <li className="pt-3 pb-1 flex flex-col gap-2">
+              <a
+                href={PROFILE.cv[lang]}
+                download
+                onClick={() => setOpen(false)}
+                className="btn-cv inline-flex h-10 w-full items-center justify-center gap-2 rounded-md border border-primary/50 text-sm font-semibold text-primary"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3v13M7 11l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3 21h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+                {t(UI.cta.resume)}
+              </a>
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}

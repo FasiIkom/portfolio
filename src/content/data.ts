@@ -15,6 +15,7 @@ export const PROFILE = {
   // TODO: replace with real GitHub username/url
   github: "https://github.com/FasiIkom",
   photo: "/images/profile.png" as string,
+  cv: { en: "/cv/cv-en.pdf", id: "/cv/cv-id.pdf" } as Record<string, string>,
   tagline: {
     en: "Undergraduate Fullstack Developer with a Computer Science background at Universitas Indonesia (GPA 3.72/4.00). 7+ shipped projects spanning face-recognition academic systems, fraud-detection platforms, and SME finance apps.",
     id: "Mahasiswa Fullstack Developer dengan latar belakang Computer Science UI (GPA 3.72/4.00). 7+ proyek nyata, mulai dari sistem akademik berbasis face recognition, platform fraud detection, hingga aplikasi keuangan UMKM.",
@@ -33,7 +34,7 @@ export const EDUCATION = {
   major: { en: "Computer Science", id: "Ilmu Komputer" } as Localized,
   period: { en: "Aug 2023 — Present", id: "Agustus 2023 — Sekarang" } as Localized,
   gpa: "3.72 / 4.00",
-  semester: "6",
+  semester: "Semester 6",
 };
 
 export type Experience = {
