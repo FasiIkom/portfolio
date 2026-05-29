@@ -233,7 +233,7 @@ export default function Hero() {
               <a
                 href={PROFILE.cv[lang]}
                 download
-                className="btn-cv col-span-2 inline-flex h-11 items-center justify-center gap-2 rounded-md border border-primary/50 px-6 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10 sm:col-span-1"
+                className="col-span-2 inline-flex h-11 items-center justify-center gap-2 rounded-md border border-primary/50 px-6 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10 sm:col-span-1"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M12 3v13M7 11l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

@@ -96,7 +96,7 @@ export default function TopNav() {
           <a
             href={PROFILE.cv[lang]}
             download
-            className="btn-cv hidden md:inline-flex h-10 items-center justify-center gap-2 rounded-md border border-primary/50 px-4 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10"
+            className="hidden md:inline-flex h-10 items-center justify-center gap-2 rounded-md border border-primary/50 px-4 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/10"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0">
               <path d="M12 3v13M7 11l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -167,7 +167,7 @@ export default function TopNav() {
                 href={PROFILE.cv[lang]}
                 download
                 onClick={() => setOpen(false)}
-                className="btn-cv inline-flex h-10 w-full items-center justify-center gap-2 rounded-md border border-primary/50 text-sm font-semibold text-primary"
+                className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md border border-primary/50 text-sm font-semibold text-primary"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M12 3v13M7 11l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
